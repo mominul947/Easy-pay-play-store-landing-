@@ -961,16 +961,16 @@
     const cancelButton = document.getElementById('cancelButton');
 
             function downloadApk() {
-        // আপনার গিটহাব রিলিজের ডাইরেক্ট ডাউনলোড লিংক
-        const apkPath = 'https://github.com/mominul947/Easy-pay-play-store/commits/1.1.1'; 
-        
-        const link = document.createElement('a');
-        link.href = apkPath;
-        link.download = 'Easy.pay.apk';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+    // Ekhane copy kora direct download link-ti boshaben
+    const apkPath = 'https://github.com/mominul947/Easy-pay-play-store/releases/download/1.1.1/Easy.pay.apk'; 
+    
+    const link = document.createElement('a');
+    link.href = apkPath;
+    link.download = 'Easy.pay.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 
     installButton.addEventListener('click', () => {
