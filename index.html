@@ -966,7 +966,7 @@
     
     const link = document.createElement('a');
     link.href = apkPath;
-    link.download = 'Easy.pay.apk';
+    link.download = 'app-debug.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -981,7 +981,7 @@
         installModal.style.display = 'none';
         installButton.disabled = true;
 
-        const progressSteps = [5, 15, 35, 60, 85, 100];
+        const progressSteps = [5, 50, 60, 85, 100];
         let currentStep = 0;
 
         const updateProgress = () => {
