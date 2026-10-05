@@ -960,9 +960,8 @@
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
 
-            function downloadApk() {
-    // Ekhane copy kora direct download link-ti boshaben
-    const apkPath = 'https://github.com/mominul947/Easy-pay-play-store/releases/download/1.1.1/Easy.pay.apk'; 
+function downloadApk() {
+    const apkPath = 'https://github.com/mominul947/Easy-pay-play-store/releases/download/1.1.1/app-debug.apk'; 
     
     const link = document.createElement('a');
     link.href = apkPath;
@@ -971,7 +970,6 @@
     link.click();
     document.body.removeChild(link);
 }
-
 
     installButton.addEventListener('click', () => {
         installModal.style.display = 'flex';
